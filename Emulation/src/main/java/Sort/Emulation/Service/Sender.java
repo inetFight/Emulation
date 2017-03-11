@@ -1,4 +1,4 @@
-package Sort.Emulation;
+package Sort.Emulation.Service;
 
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
@@ -22,20 +22,25 @@ public class Sender {
 
 	}
 
-	public void sendMessage() {
+	public void sendMessage(String messageToSend) {
 
 		try {
 			factory = new ActiveMQConnectionFactory("tcp://10.13.188.176:61616");
 			connection = factory.createConnection();
 			connection.start();
 			session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-			destination = session.createQueue("SAMPLEQUEUE");
+			destination = session.createQueue("MQ.NP. MFCHOST.01");
 			producer = session.createProducer(destination);
 			TextMessage message = session.createTextMessage();
-			message.setText("Hello ...This is a sample message..sending from FirstClient");
+			message.setText(messageToSend);
 			producer.send(message);
-			System.out.println("Sent: " + message.getText());
-
+			System.out.println("--------------------------Отправленное сообщение---------------------------");
+			System.out.println(message.getText());
+			System.out.println("--------------------------Конец отправленного сообщения---------------------");
+			
+			session.close();
+			connection.close();
+			
 		} catch (JMSException e) {
 			e.printStackTrace();
 		}

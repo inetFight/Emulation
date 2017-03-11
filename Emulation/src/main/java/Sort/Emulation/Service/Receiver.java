@@ -1,4 +1,4 @@
-package Sort.Emulation;
+package Sort.Emulation.Service;
 
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
@@ -22,7 +22,7 @@ public class Receiver {
 
 	}
 
-	public void receiveMessage() {
+	public void receiveMessage(String Queues) {
 		try {
 			factory = new ActiveMQConnectionFactory("tcp://10.13.188.176:61616");
 			
@@ -30,10 +30,10 @@ public class Receiver {
 			connection.start();
 			
 			session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-			destination = session.createQueue("MQ.NP.MFCHOST.01");
+			destination = session.createQueue(Queues);
 			
 			consumer = session.createConsumer(destination);
-			consumer.setMessageListener(new YourClass());
+			consumer.setMessageListener(new getMessageController());
 			 
 		} catch (JMSException e) {
 			e.printStackTrace();
