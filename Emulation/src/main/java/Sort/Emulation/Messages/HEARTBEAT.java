@@ -43,7 +43,7 @@ public class HEARTBEAT extends TimerTask{
 			jaxbMarshaller.marshal(msg, sw);
 			String xmlMessage = sw.toString();
 			sendMessage.sendMessage(xmlMessage);
-			SendsMessagesTimeController.addMessageId(header.getHDMGID());
+			MessageIdGenerator.removeIdFromArray(header.getHDMGID());
 		} catch (Exception e) {
 			System.err.println(e.getMessage());;
 		}

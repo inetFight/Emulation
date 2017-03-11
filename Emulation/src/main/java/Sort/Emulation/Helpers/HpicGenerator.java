@@ -20,12 +20,12 @@ public class HpicGenerator {
 			}
 		}
 		
-		
+		setUsedIdToArray(n);
 		
 		return Long.toString(n);
 	}
 	
-	public static void setUsedIdToArray(long n){
+	private static void setUsedIdToArray(long n){
 		arryHPIC.put(n, n);
 	}
 	public static void removeIdFromArray(long n){

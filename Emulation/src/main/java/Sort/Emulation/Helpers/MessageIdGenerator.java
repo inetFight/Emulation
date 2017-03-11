@@ -19,16 +19,16 @@ public class MessageIdGenerator {
 				break;
 			}
 		}
-		
+		setUsedIdToArray(n);
 		
 		
 		return Integer.toString(n);
 	}
 	
-	public static void setUsedIdToArray(int n){
+	private static void setUsedIdToArray(int n){
 		arrayIdMessage.put(n, Integer.toString(n));
 	}
-	public static void removeIdFromArray(int n){
-		arrayIdMessage.remove(n);
+	public static void removeIdFromArray(String n){
+		arrayIdMessage.remove(String.valueOf(n));
 	}
 }
