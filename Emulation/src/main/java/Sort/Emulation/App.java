@@ -2,6 +2,7 @@ package Sort.Emulation;
 
 import java.awt.Toolkit;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.Timer;
 
 import javax.jms.JMSException;
@@ -13,6 +14,7 @@ import javax.xml.bind.Marshaller;
 import Sort.Emulation.Helpers.SendsMessagesTimeController;
 import Sort.Emulation.Helpers.TimeStamp;
 import Sort.Emulation.Messages.HEARTBEAT;
+import Sort.Emulation.Messages.SORTREQ;
 import Sort.Emulation.Models.FromXSD.MSG;
 import Sort.Emulation.Models.FromXSD.MSG.BODY;
 import Sort.Emulation.Models.FromXSD.MSG.BODY.PAB;
@@ -35,17 +37,22 @@ public class App {
 //		Sender sender = new Sender();
 		
 
-		Timer timer = new Timer();
-	    timer.schedule(new HEARTBEAT(), 0, 3000);
+//		Timer timer = new Timer();
+//	    timer.schedule(new HEARTBEAT(), 0, 3000);
 //	    timer.cancel();
 //	    timer.purge();
 
-
+	    ArrayList<String> s = new ArrayList<String>();
+	    s.add("21321312312");
+	    s.add("231232132123");
+	    
+	    SORTREQ.sendSortreq(s);
+	    
 		Receiver receiver = new Receiver();
     	receiver.receiveMessage("MQ.NP. HOSTMFC.01");
 	
 		
-//		HEARTBEAT message = new HEARTBEAT();+++++++++
+//		HEARTBEAT message = new HEARTBEAT();
 //		HEADER_HEARTBEAT header = new HEADER_HEARTBEAT();
 //		header.setHDSDID("COY001");
 //		header.setHDRCID("NPHOST");
