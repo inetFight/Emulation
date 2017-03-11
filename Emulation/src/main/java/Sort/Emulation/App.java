@@ -15,6 +15,7 @@ import Sort.Emulation.Helpers.SendsMessagesTimeController;
 import Sort.Emulation.Helpers.TimeStamp;
 import Sort.Emulation.Messages.HEARTBEAT;
 import Sort.Emulation.Messages.SORTREQ;
+import Sort.Emulation.Messages.SORTRPT;
 import Sort.Emulation.Models.FromXSD.MSG;
 import Sort.Emulation.Models.FromXSD.MSG.BODY;
 import Sort.Emulation.Models.FromXSD.MSG.BODY.PAB;
@@ -47,6 +48,7 @@ public class App {
 	    s.add("231232132123");
 	    
 	    SORTREQ.sendSortreq(s);
+	    SORTRPT.sendSortrpt("321312", "1111111", "PORT33");
 	    
 		Receiver receiver = new Receiver();
     	receiver.receiveMessage("MQ.NP. HOSTMFC.01");
