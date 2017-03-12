@@ -12,9 +12,13 @@ public class SendsMessagesTimeController {
 	}
 	
 	public static String getTimeResponseMessage(String id){
-		
+		if(messagesIdAndTime.get(id) != null){
 		long totalTime = System.currentTimeMillis() - messagesIdAndTime.get(id) ;
 		
 		return String.valueOf(totalTime/(double)1000);
+		}
+		else {
+			return "Нет HDMGID";
+		}
 	}
 }

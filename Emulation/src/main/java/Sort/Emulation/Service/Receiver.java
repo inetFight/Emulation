@@ -11,6 +11,8 @@ import javax.jms.TextMessage;
 import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
 
+import Sort.Emulation.Gui.Gui;
+
 public class Receiver {
 	private ConnectionFactory factory = null;
 	private Connection connection = null;
@@ -24,19 +26,26 @@ public class Receiver {
 
 	public void receiveMessage(String Queues) {
 		try {
+			
 			factory = new ActiveMQConnectionFactory("tcp://10.13.188.176:61616");
+			
+			
 			((ActiveMQConnectionFactory)factory).setDispatchAsync(true);
+			
 			connection = factory.createConnection();
+			
 			connection.start();
 			
 			session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 			destination = session.createQueue(Queues);
 			
 			consumer = session.createConsumer(destination);
-			consumer.setMessageListener(new getMessageController());
-			
+			consumer.setMessageListener(new MessageController());
+			Gui.receiverConnectStatus.setText("<html><font color=\"Green\"><b>ОК</b></<font></html>");
 		} catch (JMSException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
+			Gui.receiverConnectStatus.setText("<html><font color=\"Red\"><b>Нет соединения</b></<font></html>");
+			
 		}
 	}
 }

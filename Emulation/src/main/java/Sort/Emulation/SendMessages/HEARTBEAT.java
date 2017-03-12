@@ -16,6 +16,7 @@ import Sort.Emulation.Models.FromXSD.MSG;
 import Sort.Emulation.Models.FromXSD.MSG.BODY;
 import Sort.Emulation.Models.FromXSD.MSG.HEADER;
 import Sort.Emulation.Service.Sender;
+import Sort.Emulation.Service.SenderSortack;
 
 public class HEARTBEAT extends TimerTask{
 	
@@ -24,13 +25,13 @@ public class HEARTBEAT extends TimerTask{
 		HEADER header = new HEADER();
 		header.setHDSDID("COY001");
 		header.setHDRCID("NPHOST");
-		header.setHDMGTP("HDMGTP");
+		header.setHDMGTP("SORTACK");
 		header.setHDMGID(MessageIdGenerator.GenerateNext());
 		header.setHDEVTM(TimeStamp.getTimeStamp());
 		msg.setHEADER(header);
 		msg.setBODY(new BODY());
 		
-		Sender sendMessage = new Sender();
+		SenderSortack sendMessage = new SenderSortack();
 		try {
 			
 		

@@ -6,6 +6,7 @@ import java.util.Random;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 
+import Sort.Emulation.Gui.Gui;
 import Sort.Emulation.Helpers.SendsMessagesTimeController;
 import Sort.Emulation.Models.FromXSD.MSG;
 import Sort.Emulation.Models.FromXSD.MSG.BODY;
@@ -21,7 +22,8 @@ public class SORTRPL {
 		String HPIC = null;
 		String CDDT = null;
 		ArrayList<String> DIDArray = new ArrayList<String>();
-		System.out.println("Время определения порта сброса " + SendsMessagesTimeController.getTimeResponseMessage(head.getHDMGID()) + " секунд");
+		Gui.labelToTimeText.setText(SendsMessagesTimeController.getTimeResponseMessage(head.getHDMGID()) + " сек");
+//		System.out.println("Время определения порта сброса " + SendsMessagesTimeController.getTimeResponseMessage(head.getHDMGID()) + " секунд");
 		for (JAXBElement<?> element : body.getHPICOrPIBOrPAB()) {
 			if(element.getName().toString().equals("HPIC")){
 				HPIC = (String) element.getValue();

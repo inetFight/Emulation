@@ -12,6 +12,7 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import Sort.Emulation.Gui.Gui;
 import Sort.Emulation.Models.FromXSD.MSG;
 import Sort.Emulation.Models.FromXSD.MSG.BODY;
 import Sort.Emulation.Models.FromXSD.MSG.BODY.PAB;
@@ -21,14 +22,17 @@ import Sort.Emulation.Models.FromXSD.ObjectFactory;
 import Sort.Emulation.ReceivedMessages.SORTACK;
 import Sort.Emulation.ReceivedMessages.SORTRPL;
 
-public class getMessageController implements MessageListener {
+public class MessageController implements MessageListener {
 
 	public void onMessage(Message message) {
 		try {
 			TextMessage textMessage = (TextMessage) message;
-			System.out.println("--------------------------Полученное сообщение---------------------------");
-			System.out.println(textMessage.getText());
-			System.out.println("--------------------------Конец полученного сообщения---------------------------");
+			Gui.receiverLog.append("----------------------------------------Принятое сообщение---------------------------------------\n");
+			Gui.receiverLog.append(textMessage.getText());
+			Gui.receiverLog.append("\n-----------------------------------Конец принятого сообщения----------------------------------\n");
+//			System.out.println("--------------------------Полученное сообщение---------------------------");
+//			System.out.println(textMessage.getText());
+//			System.out.println("--------------------------Конец полученного сообщения---------------------------");
 			StringReader reader = new StringReader(textMessage.getText());
 			JAXBContext jaxbContext = JAXBContext.newInstance(ObjectFactory.class);
 			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();

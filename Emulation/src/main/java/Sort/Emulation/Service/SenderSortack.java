@@ -12,7 +12,7 @@ import org.apache.activemq.ActiveMQConnectionFactory;
 
 import Sort.Emulation.Gui.Gui;
 
-public class Sender {
+public class SenderSortack {
 
 	private ConnectionFactory factory = null;
 	private Connection connection = null;
@@ -20,7 +20,7 @@ public class Sender {
 	private Destination destination = null;
 	private MessageProducer producer = null;
 
-	public Sender() {
+	public SenderSortack() {
 
 	}
 
@@ -30,26 +30,24 @@ public class Sender {
 			factory = new ActiveMQConnectionFactory("tcp://10.13.188.176:61616");
 			connection = factory.createConnection();
 			connection.start();
-			Gui.sendConnectStatus.setText("<html><font color=\"Green\"><b>ОК</b></<font></html>");
 			session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 			destination = session.createQueue("TOAWIS");
 			producer = session.createProducer(destination);
 			TextMessage message = session.createTextMessage();
 			message.setText(messageToSend);
 			producer.send(message);
-			Gui.sendsLog.append("-------------------------------------Отправленное сообщение------------------------------------\n");
-			Gui.sendsLog.append(message.getText());
-			Gui.sendsLog.append("\n--------------------------------Конец отправленного сообщения-------------------------------\n");
+			Gui.sendsSortackLog.append("------------------------Отправленное сообщение------------------------\n");
+			Gui.sendsSortackLog.append(message.getText());
+			Gui.sendsSortackLog.append("\n--------------------Конец отправленного сообщения-------------------\n");
 //			System.out.println("--------------------------Отправленное сообщение---------------------------");
 //			System.out.println(message.getText());
 //			System.out.println("--------------------------Конец отправленного сообщения---------------------");
-//			
+			
 			session.close();
 			connection.close();
 			
 		} catch (JMSException e) {
-			Gui.sendConnectStatus.setText("<html><font color=\"Red\"><b>Нет соединения</b></<font></html>");
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 	}}
 
