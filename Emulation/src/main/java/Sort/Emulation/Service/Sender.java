@@ -29,7 +29,7 @@ public class Sender {
 			connection = factory.createConnection();
 			connection.start();
 			session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-			destination = session.createQueue("MQ.NP. MFCHOST.01");
+			destination = session.createQueue("TOAWIS");
 			producer = session.createProducer(destination);
 			TextMessage message = session.createTextMessage();
 			message.setText(messageToSend);

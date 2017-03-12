@@ -1,4 +1,4 @@
-package Sort.Emulation.Messages;
+package Sort.Emulation.SendMessages;
 
 import java.awt.Toolkit;
 import java.io.StringWriter;

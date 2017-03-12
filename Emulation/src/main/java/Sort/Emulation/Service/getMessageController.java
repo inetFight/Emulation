@@ -18,59 +18,33 @@ import Sort.Emulation.Models.FromXSD.MSG.BODY.PAB;
 import Sort.Emulation.Models.FromXSD.MSG.BODY.PIB;
 import Sort.Emulation.Models.FromXSD.MSG.HEADER;
 import Sort.Emulation.Models.FromXSD.ObjectFactory;
+import Sort.Emulation.ReceivedMessages.SORTACK;
+import Sort.Emulation.ReceivedMessages.SORTRPL;
 
 public class getMessageController implements MessageListener {
-		
 
-		public void onMessage(Message message) {
+	public void onMessage(Message message) {
+		try {
 			TextMessage textMessage = (TextMessage) message;
-            try {
-            	System.out.println("--------------------------Полученное сообщение---------------------------");
-				System.out.println(textMessage.getText());
-				System.out.println("--------------------------Конец полученного сообщения---------------------------");
-				JAXBContext jaxbContext = JAXBContext.newInstance(ObjectFactory.class);
-				Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-				StringReader reader = new StringReader(textMessage.getText());
-				MSG msg = (MSG) unmarshaller.unmarshal(reader);
-				
-				HEADER head = msg.getHEADER();
-				BODY body = msg.getBODY();
-				String HDSDID = head.getHDSDID();
-				String HDRCID = head.getHDRCID();
-				String HDMGTP = head.getHDMGTP();
-				String HDMGID = head.getHDMGID();
-				String HDEVTM = head.getHDEVTM();
-				String HPIC = null;
-				ArrayList<String> DID = new ArrayList<String>();
-				PIB pib = null;
-				PAB pab = null;
-				
-				for (JAXBElement<?> element : body.getHPICOrPIBOrPAB()) {
-					if(element.getName().toString().equals("HPIC")){
-						HPIC = (String) element.getValue();
-					}
-					if(element.getName().toString().equals("DID")){
-						DID.add((String) element.getValue());
-						
-					}
-					if(element.getName().toString().equals("PIB")){
-						pib = (PIB) element.getValue();
-					}
-					if(element.getName().toString().equals("PAB")){
-						pab = (PAB) element.getValue();
-					}
-				}
-				System.out.println(pib.getRDID());
-				message.acknowledge();
-			} catch (JMSException e) {
-				
-				e.printStackTrace();
-			} catch (JAXBException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			System.out.println("--------------------------Полученное сообщение---------------------------");
+			System.out.println(textMessage.getText());
+			System.out.println("--------------------------Конец полученного сообщения---------------------------");
+			StringReader reader = new StringReader(textMessage.getText());
+			JAXBContext jaxbContext = JAXBContext.newInstance(ObjectFactory.class);
+			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+			MSG msg = (MSG) unmarshaller.unmarshal(reader);
+			HEADER head = msg.getHEADER();
+			String messageType = head.getHDMGTP();
+			if (messageType.equals("SORTRPL")) {
+				SORTRPL.sortrplLogic(msg);
 			}
-           
-			
+			if (messageType.equals("SORTACK")) {
+				
+				SORTACK.sortackLogic(msg);
+			}
+			message.acknowledge();
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
-		}
-
+	}
+}

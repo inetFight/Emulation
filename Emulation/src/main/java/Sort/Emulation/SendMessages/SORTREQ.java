@@ -1,4 +1,4 @@
-package Sort.Emulation.Messages;
+package Sort.Emulation.SendMessages;
 
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -8,6 +8,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import Sort.Emulation.Helpers.HpicGenerator;
 import Sort.Emulation.Helpers.MessageIdGenerator;
+import Sort.Emulation.Helpers.SendsMessagesTimeController;
 import Sort.Emulation.Helpers.TimeStamp;
 import Sort.Emulation.Models.FromXSD.MSG;
 import Sort.Emulation.Models.FromXSD.ObjectFactory;
@@ -32,6 +33,7 @@ public class SORTREQ {
 		header.setHDRCID("NPHOST");
 		header.setHDMGTP("SORTREQ");
 		header.setHDMGID(MessageIdGenerator.GenerateNext());
+		SendsMessagesTimeController.addMessageId(header.getHDMGID());
 		header.setHDEVTM(TimeStamp.getTimeStamp());
 		
 		HPIC = HpicGenerator.GenerateHPIC();

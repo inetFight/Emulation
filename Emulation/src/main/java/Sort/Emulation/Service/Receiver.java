@@ -25,7 +25,7 @@ public class Receiver {
 	public void receiveMessage(String Queues) {
 		try {
 			factory = new ActiveMQConnectionFactory("tcp://10.13.188.176:61616");
-			
+			((ActiveMQConnectionFactory)factory).setDispatchAsync(true);
 			connection = factory.createConnection();
 			connection.start();
 			
@@ -34,7 +34,7 @@ public class Receiver {
 			
 			consumer = session.createConsumer(destination);
 			consumer.setMessageListener(new getMessageController());
-			 
+			
 		} catch (JMSException e) {
 			e.printStackTrace();
 		}

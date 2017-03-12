@@ -28,7 +28,7 @@ public class HpicGenerator {
 	private static void setUsedIdToArray(long n){
 		arryHPIC.put(n, n);
 	}
-	public static void removeIdFromArray(long n){
-		arryHPIC.remove(n);
+	public static void removeIdFromArray(String n){
+		arryHPIC.remove(Long.parseLong(n));
 	}
 }
