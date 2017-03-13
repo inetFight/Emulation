@@ -36,7 +36,9 @@ public class SORTRPL {
 				DIDArray.add((String) element.getValue());
 			}
 		}
-		Gui.labelToTimeText.setText(SendsMessageHPIC_TimeControll.getTimeResponseMessage(HPIC) + " сек");
+		String time = SendsMessageHPIC_TimeControll.getTimeResponseMessage(HPIC);
+		String sec; if(time.equals("Нет HPIC")){sec="";}else {sec=" сек";}
+		Gui.labelToTimeText.setText(time + sec);
 		String DID = DIDArray.get(0);
 		
 		SORTRPT.sendSortrpt(HPIC, CDDT, DID);

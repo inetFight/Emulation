@@ -31,7 +31,7 @@ public class Receiver {
 			
 			
 			((ActiveMQConnectionFactory)factory).setDispatchAsync(true);
-			
+			Gui.receiverConnectStatus.setText("<html><font color=\"Green\"><b>ОК</b></<font></html>");
 			connection = factory.createConnection();
 			
 			connection.start();
@@ -41,7 +41,7 @@ public class Receiver {
 			
 			consumer = session.createConsumer(destination);
 			consumer.setMessageListener(new MessageController());
-			Gui.receiverConnectStatus.setText("<html><font color=\"Green\"><b>ОК</b></<font></html>");
+			
 		} catch (JMSException e) {
 			System.out.println(e.getMessage());
 			Gui.receiverConnectStatus.setText("<html><font color=\"Red\"><b>Нет соединения</b></<font></html>");

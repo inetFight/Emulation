@@ -44,8 +44,8 @@ public class Sender {
 //			System.out.println(message.getText());
 //			System.out.println("--------------------------Конец отправленного сообщения---------------------");
 //			
-			session.close();
-			connection.close();
+//			session.close();
+//			connection.close();
 			
 		} catch (JMSException e) {
 			Gui.sendConnectStatus.setText("<html><font color=\"Red\"><b>Нет соединения</b></<font></html>");

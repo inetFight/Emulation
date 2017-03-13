@@ -21,30 +21,44 @@ import Sort.Emulation.Service.SenderSortack;
 public class HEARTBEAT extends TimerTask{
 	
 	public static void sendHeartBeat(){
-		MSG msg = new MSG();
-		HEADER header = new HEADER();
-		header.setHDSDID("COY001");
-		header.setHDRCID("NPHOST");
-		header.setHDMGTP("SORTACK");
-		header.setHDMGID(MessageIdGenerator.GenerateNext());
-		header.setHDEVTM(TimeStamp.getTimeStamp());
-		msg.setHEADER(header);
-		msg.setBODY(new BODY());
 		
-		SenderSortack sendMessage = new SenderSortack();
 		try {
 			
 		
-		JAXBContext jaxbContext = JAXBContext.newInstance(MSG.class);
 		
-			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-			StringWriter sw = new StringWriter();
-			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-			jaxbMarshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
-			jaxbMarshaller.marshal(msg, sw);
-			String xmlMessage = sw.toString();
-			sendMessage.sendMessage(xmlMessage);
-			MessageIdGenerator.removeIdFromArray(header.getHDMGID());
+			new Thread(){
+			      public void run(){
+			    	  MSG msg = new MSG();
+			  		HEADER header = new HEADER();
+			  		header.setHDSDID("COY001");
+			  		header.setHDRCID("NPHOST");
+			  		header.setHDMGTP("SORTACK");
+			  		header.setHDMGID(MessageIdGenerator.GenerateNext());
+			  		header.setHDEVTM(TimeStamp.getTimeStamp());
+			  		msg.setHEADER(header);
+			  		msg.setBODY(new BODY());
+			  		
+			  		SenderSortack sendMessage = new SenderSortack();
+			    	  
+					try {
+						JAXBContext jaxbContext = JAXBContext.newInstance(MSG.class);
+						Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+						StringWriter sw = new StringWriter();
+						jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+						jaxbMarshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
+						jaxbMarshaller.marshal(msg, sw);
+						String xmlMessage = sw.toString();
+			    	  sendMessage.sendMessage(xmlMessage);
+			    	  MessageIdGenerator.removeIdFromArray(header.getHDMGID());
+					} catch (JAXBException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			  		
+						
+			      }}.start();;
+			
+			
 		} catch (Exception e) {
 			System.err.println(e.getMessage());;
 		}

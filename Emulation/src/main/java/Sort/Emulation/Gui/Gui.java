@@ -65,10 +65,11 @@ public class Gui {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				Receiver receiver = new Receiver();
+				receiver.receiveMessage("MQ.NP.HOSTMFC.01");
 			}
 		});
-		Receiver receiver = new Receiver();
-    	receiver.receiveMessage("MQ.NP.HOSTMFC.01");
+		
 	}
 
 	/**
@@ -78,7 +79,7 @@ public class Gui {
 		
 		initialize();
 	}
-
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -165,6 +166,9 @@ public class Gui {
 		scroll.setBounds(10, 236, 365, 448);
 		DefaultCaret caret = (DefaultCaret)sendsSortackLog.getCaret();
 		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+		JScrollBar vertical = scroll.getVerticalScrollBar();
+		vertical.setValue(vertical.getMaximum());
+
 		panel.add(scroll);
 		
 		
@@ -175,6 +179,8 @@ public class Gui {
 		scrollsendsLog.setBounds(398, 82, 460, 602);
 		DefaultCaret caretsendsLog = (DefaultCaret)sendsLog.getCaret();
 		caretsendsLog.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+		JScrollBar verticalS = scrollsendsLog.getVerticalScrollBar();
+		verticalS.setValue(verticalS.getMaximum());
 		panel.add(scrollsendsLog);
 		
 		receiverLog = new JTextArea();
@@ -184,6 +190,9 @@ public class Gui {
 		scrollreceiverLog.setBounds(890, 82, 460, 602);
 		DefaultCaret caretReceiverLog = (DefaultCaret)receiverLog.getCaret();
 		caretReceiverLog.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+		JScrollBar verticalR = scrollreceiverLog.getVerticalScrollBar();
+		verticalR.setValue(verticalR.getMaximum());
+		
 		panel.add(scrollreceiverLog);
 		
 		
