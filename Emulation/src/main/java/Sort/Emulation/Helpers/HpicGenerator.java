@@ -5,7 +5,6 @@ import java.util.Random;
 
 public class HpicGenerator {
 	final private static HashMap<Long, Long> arryHPIC = new HashMap<Long, Long>();
-	
 	public static String GenerateHPIC(){
 		Random rnd = new Random();
 		Long n = (long) 1;
@@ -21,6 +20,7 @@ public class HpicGenerator {
 		}
 		
 		setUsedIdToArray(n);
+		
 		
 		return Long.toString(n);
 	}

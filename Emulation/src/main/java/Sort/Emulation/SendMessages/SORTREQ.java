@@ -8,6 +8,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import Sort.Emulation.Helpers.HpicGenerator;
 import Sort.Emulation.Helpers.MessageIdGenerator;
+import Sort.Emulation.Helpers.SendsMessageHPIC_TimeControll;
 import Sort.Emulation.Helpers.SendsMessagesTimeController;
 import Sort.Emulation.Helpers.TimeStamp;
 import Sort.Emulation.Models.FromXSD.MSG;
@@ -37,7 +38,7 @@ public class SORTREQ {
 		header.setHDEVTM(TimeStamp.getTimeStamp());
 		
 		HPIC = HpicGenerator.GenerateHPIC();
-		
+		SendsMessageHPIC_TimeControll.addHPICId(HPIC);
 		JAXBElement<String> hpicJAX = factory.createMSGBODYHPIC(HPIC);
 		body.getHPICOrPIBOrPAB().add(hpicJAX);
 		
