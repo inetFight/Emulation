@@ -68,7 +68,7 @@ public class Gui {
 			}
 		});
 		Receiver receiver = new Receiver();
-    	receiver.receiveMessage("FROMAWIS");
+    	receiver.receiveMessage("MQ.NP.HOSTMFC.01");
 	}
 
 	/**

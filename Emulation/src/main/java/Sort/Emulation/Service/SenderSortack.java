@@ -31,7 +31,7 @@ public class SenderSortack {
 			connection = factory.createConnection();
 			connection.start();
 			session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-			destination = session.createQueue("TOAWIS");
+			destination = session.createQueue("MQ.NP.MFCHOST.01");
 			producer = session.createProducer(destination);
 			TextMessage message = session.createTextMessage();
 			message.setText(messageToSend);

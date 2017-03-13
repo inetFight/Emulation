@@ -32,7 +32,7 @@ public class Sender {
 			connection.start();
 			Gui.sendConnectStatus.setText("<html><font color=\"Green\"><b>ОК</b></<font></html>");
 			session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-			destination = session.createQueue("TOAWIS");
+			destination = session.createQueue("MQ.NP.MFCHOST.01");
 			producer = session.createProducer(destination);
 			TextMessage message = session.createTextMessage();
 			message.setText(messageToSend);
