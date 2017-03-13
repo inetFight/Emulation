@@ -26,6 +26,7 @@ public class MessageController implements MessageListener {
 
 	public void onMessage(Message message) {
 		try {
+			
 			TextMessage textMessage = (TextMessage) message;
 			Gui.receiverLog.append("----------------------------------------Принятое сообщение---------------------------------------\n");
 			Gui.receiverLog.append(textMessage.getText());
