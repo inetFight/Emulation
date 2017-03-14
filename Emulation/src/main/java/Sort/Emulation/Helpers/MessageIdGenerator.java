@@ -10,7 +10,7 @@ public class MessageIdGenerator {
 		Random rnd = new Random();
 		int n = 1;
 		while(true){
-			n = 100000 + rnd.nextInt(999999);
+			n = 100000 + rnd.nextInt(899999);
 			if(arrayIdMessage.get(n) != null){
 				continue;
 			}

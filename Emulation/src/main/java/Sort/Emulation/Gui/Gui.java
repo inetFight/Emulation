@@ -164,11 +164,11 @@ public class Gui {
 		JScrollPane scroll = new JScrollPane(sendsSortackLog);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scroll.setBounds(10, 236, 365, 448);
-		DefaultCaret caret = (DefaultCaret)sendsSortackLog.getCaret();
-		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 		JScrollBar vertical = scroll.getVerticalScrollBar();
 		vertical.setValue(vertical.getMaximum());
-
+		DefaultCaret caret = (DefaultCaret)sendsSortackLog.getCaret();
+		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+		
 		panel.add(scroll);
 		
 		
@@ -177,10 +177,11 @@ public class Gui {
 		JScrollPane scrollsendsLog = new JScrollPane(sendsLog);
 		scrollsendsLog.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollsendsLog.setBounds(398, 82, 460, 602);
-		DefaultCaret caretsendsLog = (DefaultCaret)sendsLog.getCaret();
-		caretsendsLog.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 		JScrollBar verticalS = scrollsendsLog.getVerticalScrollBar();
 		verticalS.setValue(verticalS.getMaximum());
+		DefaultCaret caretsendsLog = (DefaultCaret)sendsLog.getCaret();
+		caretsendsLog.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+		
 		panel.add(scrollsendsLog);
 		
 		receiverLog = new JTextArea();
@@ -188,10 +189,10 @@ public class Gui {
 		JScrollPane scrollreceiverLog = new JScrollPane(receiverLog);
 		scrollreceiverLog.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollreceiverLog.setBounds(890, 82, 460, 602);
-		DefaultCaret caretReceiverLog = (DefaultCaret)receiverLog.getCaret();
-		caretReceiverLog.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 		JScrollBar verticalR = scrollreceiverLog.getVerticalScrollBar();
 		verticalR.setValue(verticalR.getMaximum());
+		DefaultCaret caretReceiverLog = (DefaultCaret)receiverLog.getCaret();
+		caretReceiverLog.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 		
 		panel.add(scrollreceiverLog);
 		
