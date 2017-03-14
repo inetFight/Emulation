@@ -24,32 +24,38 @@ import Sort.Emulation.ReceivedMessages.SORTRPL;
 
 public class MessageController implements MessageListener {
 
-	public void onMessage(Message message) {
-		try {
-			
-			TextMessage textMessage = (TextMessage) message;
-			Gui.receiverLog.append("----------------------------------------Принятое сообщение---------------------------------------\n");
-			Gui.receiverLog.append(textMessage.getText());
-			Gui.receiverLog.append("\n-----------------------------------Конец принятого сообщения----------------------------------\n");
-//			System.out.println("--------------------------Полученное сообщение---------------------------");
-//			System.out.println(textMessage.getText());
-//			System.out.println("--------------------------Конец полученного сообщения---------------------------");
-			StringReader reader = new StringReader(textMessage.getText());
-			JAXBContext jaxbContext = JAXBContext.newInstance(ObjectFactory.class);
-			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-			MSG msg = (MSG) unmarshaller.unmarshal(reader);
-			HEADER head = msg.getHEADER();
-			String messageType = head.getHDMGTP();
-			if (messageType.equals("SORTRPL")) {
-				SORTRPL.sortrplLogic(msg);
-			}
-			if (messageType.equals("SORTACK")) {
-				
-				SORTACK.sortackLogic(msg);
-			}
-			message.acknowledge();
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+	public void onMessage(final Message message) {
+		
+		new Thread(){
+		      public void run(){
+		    	  try {
+		  			
+		    		  TextMessage textMessage = (TextMessage) message;
+		  			Gui.receiverLog.append("----------------------------------------Принятое сообщение---------------------------------------\n");
+		  			Gui.receiverLog.append(textMessage.getText());
+		  			Gui.receiverLog.append("\n-----------------------------------Конец принятого сообщения----------------------------------\n");
+//		  			System.out.println("--------------------------Полученное сообщение---------------------------");
+//		  			System.out.println(textMessage.getText());
+//		  			System.out.println("--------------------------Конец полученного сообщения---------------------------");
+		  			StringReader reader = new StringReader(textMessage.getText());
+		  			JAXBContext jaxbContext = JAXBContext.newInstance(ObjectFactory.class);
+		  			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+		  			MSG msg = (MSG) unmarshaller.unmarshal(reader);
+		  			HEADER head = msg.getHEADER();
+		  			String messageType = head.getHDMGTP();
+		  			if (messageType.equals("SORTRPL")) {
+		  				SORTRPL.sortrplLogic(msg);
+		  			}
+		  			if (messageType.equals("SORTACK")) {
+		  				
+		  				SORTACK.sortackLogic(msg);
+		  			}
+		  			message.acknowledge();
+		  		} catch (Exception e) {
+		  			// TODO: handle exception
+		  		}  
+		    	  
+		      }}.start();;
+		
 	}
 }
