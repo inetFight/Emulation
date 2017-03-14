@@ -37,7 +37,7 @@ public class MessageController implements MessageListener {
 					TextMessage textMessage = (TextMessage) message;
 
 					Gui.receiverLog
-							.append("----------------------------------------Принятое сообщение---------------------------------------\n"
+							.append("\n----------------------------------------Принятое сообщение---------------------------------------\n"
 									+ textMessage.getText()
 									+ "\n-----------------------------------Конец принятого сообщения----------------------------------\n");
 
