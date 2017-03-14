@@ -37,19 +37,24 @@ public class Sender {
 			TextMessage message = session.createTextMessage();
 			message.setText(messageToSend);
 			producer.send(message);
-			Gui.sendsLog.append("-------------------------------------Отправленное сообщение------------------------------------\n");
-			Gui.sendsLog.append(message.getText());
-			Gui.sendsLog.append("\n--------------------------------Конец отправленного сообщения-------------------------------\n");
-//			System.out.println("--------------------------Отправленное сообщение---------------------------");
-//			System.out.println(message.getText());
-//			System.out.println("--------------------------Конец отправленного сообщения---------------------");
-//			
-//			session.close();
-//			connection.close();
-			
+
+			Gui.sendsLog
+					.append("\n-------------------------------------Отправленное сообщение------------------------------------\n"
+							+ message.getText()
+							+ "\n--------------------------------Конец отправленного сообщения-------------------------------\n");
+
+			// System.out.println("--------------------------Отправленное
+			// сообщение---------------------------");
+			// System.out.println(message.getText());
+			// System.out.println("--------------------------Конец отправленного
+			// сообщения---------------------");
+			//
+			session.close();
+			connection.close();
+
 		} catch (JMSException e) {
 			Gui.sendConnectStatus.setText("<html><font color=\"Red\"><b>Нет соединения</b></<font></html>");
 			System.out.println(e.getMessage());
 		}
-	}}
-
+	}
+}

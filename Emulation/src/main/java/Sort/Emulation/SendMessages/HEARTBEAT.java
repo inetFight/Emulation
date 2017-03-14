@@ -18,28 +18,26 @@ import Sort.Emulation.Models.FromXSD.MSG.HEADER;
 import Sort.Emulation.Service.Sender;
 import Sort.Emulation.Service.SenderSortack;
 
-public class HEARTBEAT extends TimerTask{
-	
-	public static void sendHeartBeat(){
-		
+public class HEARTBEAT extends TimerTask {
+
+	public static void sendHeartBeat() {
+
 		try {
-			
-		
-		
-			new Thread(){
-			      public void run(){
-			    	  MSG msg = new MSG();
-			  		HEADER header = new HEADER();
-			  		header.setHDSDID("COY001");
-			  		header.setHDRCID("NPHOST");
-			  		header.setHDMGTP("SORTACK");
-			  		header.setHDMGID(MessageIdGenerator.GenerateNext());
-			  		header.setHDEVTM(TimeStamp.getTimeStamp());
-			  		msg.setHEADER(header);
-			  		msg.setBODY(new BODY());
-			  		
-			  		SenderSortack sendMessage = new SenderSortack();
-			    	  
+
+			new Thread() {
+				public void run() {
+					MSG msg = new MSG();
+					HEADER header = new HEADER();
+					header.setHDSDID("COY001");
+					header.setHDRCID("NPHOST");
+					header.setHDMGTP("SORTACK");
+					header.setHDMGID(MessageIdGenerator.GenerateNext());
+					header.setHDEVTM(TimeStamp.getTimeStamp());
+					msg.setHEADER(header);
+					msg.setBODY(new BODY());
+
+					SenderSortack sendMessage = new SenderSortack();
+
 					try {
 						JAXBContext jaxbContext = JAXBContext.newInstance(MSG.class);
 						Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
@@ -48,25 +46,25 @@ public class HEARTBEAT extends TimerTask{
 						jaxbMarshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
 						jaxbMarshaller.marshal(msg, sw);
 						String xmlMessage = sw.toString();
-			    	  sendMessage.sendMessage(xmlMessage);
-			    	  MessageIdGenerator.removeIdFromArray(header.getHDMGID());
+						sendMessage.sendMessage(xmlMessage);
+						MessageIdGenerator.removeIdFromArray(header.getHDMGID());
 					} catch (JAXBException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-			  		
-						
-			      }}.start();;
-			
-			
+
+				}
+			}.start();
+
 		} catch (Exception e) {
-			System.err.println(e.getMessage());;
+			System.err.println(e.getMessage());
+
 		}
 	}
+
 	@Override
 	public void run() {
 		sendHeartBeat();
 	}
 
-	
 }

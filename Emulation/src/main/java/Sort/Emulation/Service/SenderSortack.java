@@ -36,19 +36,16 @@ public class SenderSortack {
 			TextMessage message = session.createTextMessage();
 			message.setText(messageToSend);
 			producer.send(message);
-			Gui.sendsSortackLog.append("------------------------Отправленное сообщение------------------------\n");
-			Gui.sendsSortackLog.append(message.getText());
-			Gui.sendsSortackLog.append("\n--------------------Конец отправленного сообщения-------------------\n");
-//			System.out.println("--------------------------Отправленное сообщение---------------------------");
-//			System.out.println(message.getText());
-//			System.out.println("--------------------------Конец отправленного сообщения---------------------");
-			
+
+			Gui.sendsSortackLog.append("\n------------------------Отправленное сообщение------------------------\n"
+					+ message.getText() + "\n--------------------Конец отправленного сообщения-------------------\n");
+
 			session.close();
 			connection.close();
-			
+
 		} catch (JMSException e) {
 			Gui.sendConnectStatus.setText("<html><font color=\"Red\"><b>Нет соединения</b></<font></html>");
 			System.out.println(e.getMessage());
 		}
-	}}
-
+	}
+}
