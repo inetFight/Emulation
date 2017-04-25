@@ -30,7 +30,7 @@ public class HEARTBEAT extends TimerTask {
 					HEADER header = new HEADER();
 					header.setHDSDID("COY001");
 					header.setHDRCID("NPHOST");
-					header.setHDMGTP("SORTACK");
+					header.setHDMGTP("HEARTBEAT");
 					header.setHDMGID(MessageIdGenerator.GenerateNext());
 					header.setHDEVTM(TimeStamp.getTimeStamp());
 					msg.setHEADER(header);

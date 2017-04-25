@@ -24,7 +24,7 @@ public class SORTRPL {
 		String CDDT = null;
 		ArrayList<String> DIDArray = new ArrayList<String>();
 		
-//		System.out.println("Время определения порта сброса " + SendsMessagesTimeController.getTimeResponseMessage(head.getHDMGID()) + " секунд");
+//		System.out.println("Время определения порта сброса " + SendsMessagesT*imeController.getTimeResponseMessage(head.getHDMGID()) + " секунд");
 		for (JAXBElement<?> element : body.getHPICOrPIBOrPAB()) {
 			if(element.getName().toString().equals("HPIC")){
 				HPIC = (String) element.getValue();
