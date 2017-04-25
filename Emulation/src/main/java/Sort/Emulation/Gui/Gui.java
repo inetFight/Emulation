@@ -229,8 +229,8 @@ public class Gui {
 		barcode5Label.setBounds(10, 134, 93, 20);
 		panel.add(barcode5Label);
 
-		final JButton StartSortack = new JButton("<html>Старт отправки<br><p align=\"center\"> SORTACK</html>");
-		final JButton StopSortack = new JButton("<html>Стоп  отправки<br><p align=\"center\"> SORTACK</html>");
+		final JButton StartSortack = new JButton("<html>Старт отправки<br><p align=\"center\"> HEARTBEAT</html>");
+		final JButton StopSortack = new JButton("<html>Стоп  отправки<br><p align=\"center\">  HEARTBEAT</html>");
 		StopSortack.setEnabled(false);
 		StartSortack.setBounds(10, 165, 172, 37);
 		StopSortack.setBounds(203, 165, 172, 37);
@@ -255,7 +255,7 @@ public class Gui {
 			}
 		});
 
-		JLabel SortackLog = new JLabel("Лог отправки SORTACK");
+		JLabel SortackLog = new JLabel("Лог отправки  HEARTBEAT");
 		SortackLog.setHorizontalAlignment(SwingConstants.CENTER);
 		SortackLog.setBounds(10, 216, 260, 20);
 		panel.add(SortackLog);
