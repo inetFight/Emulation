@@ -10,5 +10,10 @@ public class TimeStamp {
 			      new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss,SSS" + "+02:00");	
 		return ft.format(new Date());
 	}
+	public static String getTimeStampForUI(){
+		SimpleDateFormat ft = 
+			      new SimpleDateFormat ("HH:mm:ss,SSS");	
+		return ft.format(new Date());
+	}
 
 }
