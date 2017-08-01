@@ -13,7 +13,7 @@ public class TimeStamp {
 	public static String getTimeStampForUI(){
 		SimpleDateFormat ft = 
 			      new SimpleDateFormat ("HH:mm:ss,SSS");	
-		return ft.format(new Date());
+		return ft.format(new Date()); 
 	}
 
 }
